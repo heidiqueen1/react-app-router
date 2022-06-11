@@ -6,7 +6,7 @@ const Person = ({img,name,description,url}) => {
         <img src={img} />
         <h2>{name}</h2>
         <p>{description}</p>
-        <p>{url}</p>
+        <a href={url} target="_blank">Biografía o Perfil</a>
     </div>
   );
 }

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import Person from "./Person/Person.jsx";
+import Person from "./person/Person.jsx";
 import Ada from "../img/Ada.png";
 import Bill from "../img/Bill.png";
 import Gosling from "../img/Gosling.png";
 import Sergio from "../img/Sergio.png";
 import Niklaus from "../img/Niklaus.png";
+import { useParams } from "react-router-dom";
+import {  Link  } from 'react-router-dom';
 
 const Persons = () => {
   const [persons, setPersons] = useState([
     {
-      id: 1,
+      id: "ada",
       img: Ada,
       name: "Ada Lovelance",
       description:
@@ -18,7 +20,7 @@ const Persons = () => {
     },
 
     {
-      id: 2,
+      id: "niklaus",
       img: Niklaus,
       name: "Niklaus Wirth",
       description:
@@ -27,7 +29,7 @@ const Persons = () => {
     },
 
     {
-      id: 3,
+      id: "bill",
       img: Bill,
       name: "Bill Gates",
       description:
@@ -35,7 +37,7 @@ const Persons = () => {
       url: "https://es.wikipedia.org/wiki/Bill_Gates",
     },
     {
-      id: 4,
+      id: "gosling",
       img: Gosling,
       name: "James Gosling",
       description:
@@ -43,7 +45,7 @@ const Persons = () => {
       url: "https://www.ecured.cu/James_Gosling",
     },
     {
-      id: 5,
+      id: "sergio",
       img: Sergio,
       name: "Sergio Marentes",
       description:
@@ -51,18 +53,23 @@ const Persons = () => {
       url: "https://www.linkedin.com/in/samarentesm/?originalSubdomain:co",
     },
   ]);
+
+  const { personas } = useParams();
+  const [elegido] = persons.filter((persona) => persona.id === personas);
   return (
     <div className="row">
-      {persons.map((person) => {
-        return (
-          <Person
-            name={person.name}
-            description={person.description}
-            url={person.url}
-            img={person.img}
-          />
-        );
-      })}
+      {elegido ? (
+        <Person
+          name={elegido.name}
+          description={elegido.description}
+          url={elegido.url}
+          img={elegido.img}
+        />
+      ) : (
+        <div>No se encontró tu personaje</div>
+      )}
+
+      <Link className="link" to='/'><button className="tarea-boton-home">Regresar</button></Link>
     </div>
   );
 };
